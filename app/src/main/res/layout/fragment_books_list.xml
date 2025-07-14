@@ -7,17 +7,10 @@
     android:background="#42A5F5"
     tools:context=".fragments.BooksListFragment">
 
-
-  <GridView
-      android:id="@+id/gridOptions"
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/rvBookList"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_marginTop="40dp"
-      android:clipToPadding="false"
-      android:horizontalSpacing="20dp"
-      android:numColumns="2"
-      android:padding="16dp"
-      android:verticalSpacing="20dp" />
+      android:layout_height="match_parent"/>
 
   <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addBook"

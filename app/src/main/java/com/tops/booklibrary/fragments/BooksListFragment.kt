@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.tops.booklibrary.R
-import com.tops.booklibrary.adapter.MyAdapter
+import com.tops.booklibrary.adapter.BookAdapter
 import com.tops.booklibrary.databinding.FragmentBooksListBinding
 import com.tops.booklibrary.viewModels.AddBookViewModel
 
@@ -20,7 +22,7 @@ class BooksListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentBooksListBinding.inflate(layoutInflater)
+        binding = FragmentBooksListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -29,8 +31,11 @@ class BooksListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         addBookViewModel.loadlistofbooks(requireContext())
 
+
+        binding.rvBookList.layoutManager = LinearLayoutManager(requireContext())
+
         addBookViewModel.books.observe(viewLifecycleOwner){blist->
-            binding.gridOptions.adapter = MyAdapter(requireContext() , blist )
+            binding.rvBookList.adapter = BookAdapter(blist)
         }
 
 
