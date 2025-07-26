@@ -17,7 +17,7 @@ class AddBookViewModel : ViewModel(){
 
     fun loadlistofbooks(context: Context){
         db = context.openOrCreateDatabase("library", Context.MODE_PRIVATE, null)
-//        db.execSQL("CREATE TABLE IF NOT EXISTS books(id INTEGER PRIMARY KEY AUTOINCREMENT,title VARCHAR, author VARCHAR, image BLOB);")
+        db.execSQL("CREATE TABLE IF NOT EXISTS books(id INTEGER PRIMARY KEY AUTOINCREMENT,title VARCHAR, author VARCHAR, image BLOB);")
 
         val booklist = mutableListOf<BookRoot>()
 
