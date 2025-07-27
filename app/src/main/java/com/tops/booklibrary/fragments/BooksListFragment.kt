@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,11 +14,13 @@ import com.tops.booklibrary.R
 import com.tops.booklibrary.adapter.BookAdapter
 import com.tops.booklibrary.databinding.FragmentBooksListBinding
 import com.tops.booklibrary.viewModels.AddBookViewModel
+import com.tops.booklibrary.viewModels.BooksViewModel
 
 
 class BooksListFragment : Fragment() {
     private lateinit var binding: FragmentBooksListBinding
-    private val addBookViewModel : AddBookViewModel by viewModels()
+    private val booksViewModel : BooksViewModel by viewModels()
+    private  lateinit var adapter :  BookAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,16 +32,11 @@ class BooksListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        addBookViewModel.loadlistofbooks(requireContext())
-
-
         binding.rvBookList.layoutManager = LinearLayoutManager(requireContext())
-
-        addBookViewModel.books.observe(viewLifecycleOwner){blist->
-            binding.rvBookList.adapter = BookAdapter(blist)
-        }
-
-
+        adapter = BookAdapter(mutableListOf())
+        booksViewModel.listBooks.observe(viewLifecycleOwner, Observer{
+            list->adapter.submitList(list)
+        })
         binding.addBook.setOnClickListener {
             findNavController().navigate(R.id.action_booksListFragment_to_addBookFragment)
         }

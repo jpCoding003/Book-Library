@@ -41,6 +41,11 @@ android {
 
 dependencies {
 
+    implementation("androidx.room:room-runtime:2.7.2")
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:2.7.2")
+
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
