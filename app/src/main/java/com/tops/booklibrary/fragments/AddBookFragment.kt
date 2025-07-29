@@ -1,28 +1,28 @@
 package com.tops.booklibrary.fragments
 
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.tops.booklibrary.R
 import com.tops.booklibrary.databinding.FragmentAddBookBinding
-import com.tops.booklibrary.viewModels.AddBookViewModel
-import org.jetbrains.annotations.Contract
+import com.tops.booklibrary.viewModels.BooksViewModel
 
 
 class AddBookFragment : Fragment() {
 
     private lateinit var binding: FragmentAddBookBinding
-    private  val addBookViewModel: AddBookViewModel by viewModels()
+    private  val addBookViewModel: BooksViewModel by viewModels()
     private lateinit var pickmedia: ActivityResultLauncher<PickVisualMediaRequest>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,9 +50,25 @@ class AddBookFragment : Fragment() {
         binding.btnaddBook.setOnClickListener {
             val title = binding.etTitle.text.toString()
             val author = binding.etAuthor.text.toString()
-            val bookimage = binding.bookImage.toString().toByteArray()
-            addBookViewModel.addbooktoLibrary(requireContext(),title,author,bookimage, isread = false.toString() )
-            findNavController().navigate(R.id.action_addBookFragment_to_booksListFragment)
+//            val bookimage = binding.bookImage.toString()
+//            addBookViewModel.addBooks(requireContext(),title,author,bookimage)
+//            findNavController().navigate(R.id.action_addBookFragment_to_booksListFragment)
+
+            // Get Bitmap from ImageView
+            binding.bookImage.isDrawingCacheEnabled = true
+            binding.bookImage.buildDrawingCache()
+            val bitmap = getBitmapFromImageView(binding.bookImage)
+
+            if (title.isNotBlank() && author.isNotBlank() && bitmap != null) {
+                addBookViewModel.addBooks(requireContext(), title, author, bitmap)
+                findNavController().navigate(R.id.action_addBookFragment_to_booksListFragment)
+            } else {
+                Toast.makeText(context, "Please fill all fields and select an image", Toast.LENGTH_SHORT).show()
+            }
+
         }
+    }
+    fun getBitmapFromImageView(imageView: ImageView): Bitmap? {
+        return (imageView.drawable as? BitmapDrawable)?.bitmap
     }
 }

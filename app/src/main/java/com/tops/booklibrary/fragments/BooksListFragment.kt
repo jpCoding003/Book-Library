@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.tops.booklibrary.R
 import com.tops.booklibrary.adapter.BookAdapter
 import com.tops.booklibrary.databinding.FragmentBooksListBinding
-import com.tops.booklibrary.viewModels.AddBookViewModel
 import com.tops.booklibrary.viewModels.BooksViewModel
 
 
@@ -32,11 +31,15 @@ class BooksListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        booksViewModel.getBooks(requireContext())
+
         binding.rvBookList.layoutManager = LinearLayoutManager(requireContext())
         adapter = BookAdapter(mutableListOf())
         booksViewModel.listBooks.observe(viewLifecycleOwner, Observer{
             list->adapter.submitList(list)
         })
+
         binding.addBook.setOnClickListener {
             findNavController().navigate(R.id.action_booksListFragment_to_addBookFragment)
         }

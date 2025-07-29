@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("kotlin-kapt")
 }
 
 android {
@@ -45,6 +46,7 @@ dependencies {
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation("androidx.room:room-ktx:2.7.2")
 
+    kapt("androidx.room:room-compiler:2.7.2")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
