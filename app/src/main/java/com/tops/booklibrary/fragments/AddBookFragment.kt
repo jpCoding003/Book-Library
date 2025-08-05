@@ -65,7 +65,6 @@ class AddBookFragment : Fragment() {
             } else {
                 Toast.makeText(context, "Please fill all fields and select an image", Toast.LENGTH_SHORT).show()
             }
-
         }
     }
     fun getBitmapFromImageView(imageView: ImageView): Bitmap? {

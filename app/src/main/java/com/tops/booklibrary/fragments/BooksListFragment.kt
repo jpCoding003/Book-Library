@@ -39,6 +39,7 @@ class BooksListFragment : Fragment() {
         booksViewModel.listBooks.observe(viewLifecycleOwner, Observer{
             list->adapter.submitList(list)
         })
+        binding.rvBookList.adapter = adapter
 
         binding.addBook.setOnClickListener {
             findNavController().navigate(R.id.action_booksListFragment_to_addBookFragment)

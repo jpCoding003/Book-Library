@@ -23,8 +23,6 @@
 
             val db = Room.databaseBuilder(context, BooksDataBase::class.java,"library").build()
             val booksDao =db.bookDao()
-//            val books : MutableList<Books> = booksDao.getAll()
-//            _listBooks.value = books.toMutableList()
 
             // Use coroutine for background work
             viewModelScope.launch(Dispatchers.IO) {
@@ -38,7 +36,7 @@
             val booksDao = db.bookDao()
 
             val newBook = Books(
-                bookId = 0, // Room will auto-generate it
+             // Room will auto-generate it
                 bookName = title,
                 authorName = author, // set current date, or pass one if needed
                 coverPage = bookimage
