@@ -22,5 +22,17 @@
         <action
             android:id="@+id/action_addBookFragment_to_booksListFragment"
             app:destination="@id/booksListFragment" />
+        <action
+            android:id="@+id/action_addBookFragment_to_pendingBooksFragment"
+            app:destination="@id/pendingBooksFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pendingBooksFragment"
+        android:name="com.tops.booklibrary.fragments.PendingBooksFragment"
+        android:label="fragment_pending_books"
+        tools:layout="@layout/fragment_pending_books" >
+        <action
+            android:id="@+id/action_pendingBooksFragment_to_addBookFragment"
+            app:destination="@id/addBookFragment" />
     </fragment>
 </navigation>

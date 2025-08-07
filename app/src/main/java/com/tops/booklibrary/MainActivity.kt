@@ -8,7 +8,6 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.tabs.TabLayoutMediator
 import com.tops.booklibrary.adapter.ViewPagerAdapter
 import com.tops.booklibrary.databinding.ActivityMainBinding
-import com.tops.booklibrary.fragments.BlankFragment
 import com.tops.booklibrary.fragments.BooksListFragment
 import com.tops.booklibrary.fragments.PendingBooksFragment
 

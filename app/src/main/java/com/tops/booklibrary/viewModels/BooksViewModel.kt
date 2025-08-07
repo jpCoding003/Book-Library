@@ -1,6 +1,5 @@
     package com.tops.booklibrary.viewModels
 
-    import android.content.ContentValues
     import android.content.Context
     import android.graphics.Bitmap
     import androidx.lifecycle.LiveData
@@ -20,7 +19,6 @@
 
 
         fun getBooks(context: Context){
-
             val db = Room.databaseBuilder(context, BooksDataBase::class.java,"library").build()
             val booksDao =db.bookDao()
 
